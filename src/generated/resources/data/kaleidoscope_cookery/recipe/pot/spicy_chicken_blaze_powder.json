@@ -11,19 +11,25 @@
       "tag": "c:crops/chilipepper"
     },
     {
-      "tag": "c:foods/raw_chicken"
+      "tag": "c:crops/chilipepper"
     },
     {
-      "tag": "c:foods/raw_chicken"
+      "tag": "c:crops/chilipepper"
     },
     {
-      "tag": "c:foods/raw_chicken"
+      "tag": "c:crops/chilipepper"
     },
     {
-      "tag": "c:foods/raw_chicken"
+      "tag": "c:raw_chicken"
     },
     {
-      "item": "minecraft:blaze_powder"
+      "tag": "c:raw_chicken"
+    },
+    {
+      "tag": "c:raw_chicken"
+    },
+    {
+      "tag": "c:raw_chicken"
     }
   ],
   "result": {

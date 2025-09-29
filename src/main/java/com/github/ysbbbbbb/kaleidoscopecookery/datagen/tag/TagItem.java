@@ -6,14 +6,11 @@ import com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagCommon;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -21,12 +18,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
+import static com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagCommon.FD_KNIVES;
 import static com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod.*;
+import static net.minecraft.tags.ItemTags.VILLAGER_PLANTABLE_SEEDS;
 import static net.minecraft.world.item.Items.*;
 
 public class TagItem extends ItemTagsProvider {
-    public static final TagKey<Item> POT_INGREDIENT = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "pot_ingredient"));
-
     public TagItem(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider,
                    CompletableFuture<TagLookup<Block>> pBlockTags, @Nullable ExistingFileHelper existingFileHelper) {
         super(pOutput, pLookupProvider, pBlockTags, KaleidoscopeCookery.MOD_ID, existingFileHelper);
@@ -39,22 +36,38 @@ public class TagItem extends ItemTagsProvider {
         tag(LIT_STOVE).add(FLINT_AND_STEEL, FIRE_CHARGE);
         tag(STRAW_HAT).add(ModItems.STRAW_HAT.get(),
                 ModItems.STRAW_HAT_FLOWER.get());
+
         tag(KITCHEN_KNIFE).add(ModItems.IRON_KITCHEN_KNIFE.get(),
+                        ModItems.GOLD_KITCHEN_KNIFE.get(),
+                        ModItems.DIAMOND_KITCHEN_KNIFE.get(),
+                        ModItems.NETHERITE_KITCHEN_KNIFE.get())
+                .addOptionalTag(ResourceLocation.parse("farmersdelight:tools/knives"));
+
+        tag(KITCHEN_SHOVEL).add(ModItems.KITCHEN_SHOVEL.get());
+
+        // 农夫乐事
+        tag(FD_KNIVES).add(ModItems.IRON_KITCHEN_KNIFE.get(),
                 ModItems.GOLD_KITCHEN_KNIFE.get(),
                 ModItems.DIAMOND_KITCHEN_KNIFE.get(),
                 ModItems.NETHERITE_KITCHEN_KNIFE.get());
+
         tag(FARMER_ARMOR).add(ModItems.FARMER_CHEST_PLATE.get(),
                         ModItems.FARMER_LEGGINGS.get(),
                         ModItems.FARMER_BOOTS.get())
                 .addTag(STRAW_HAT);
-        tag(PRESERVATION_FOOD).add(Items.ROTTEN_FLESH, Items.CHICKEN,
-                Items.PUFFERFISH, Items.SPIDER_EYE, Items.POISONOUS_POTATO);
         this.tag(TagMod.STRAW_BALE).add(HAY_BLOCK, ModItems.STRAW_BLOCK.get());
 
         this.tag(COOKERY_MOD_SEEDS).add(
                 ModItems.TOMATO_SEED.get(), ModItems.CHILI_SEED.get(),
                 ModItems.WILD_RICE_SEED.get(), ModItems.LETTUCE_SEED.get()
         );
+
+        this.tag(INGREDIENT_CONTAINER).add(BUCKET, BOWL, GLASS_BOTTLE);
+        this.tag(GLASS_BOTTLE_CONTAINER).add(HONEY_BOTTLE);
+        this.tag(BUCKET_CONTAINER).add(WATER_BUCKET, LAVA_BUCKET, MILK_BUCKET,
+                SALMON_BUCKET, COD_BUCKET, TROPICAL_FISH_BUCKET, PUFFERFISH_BUCKET,
+                AXOLOTL_BUCKET, TADPOLE_BUCKET, POWDER_SNOW_BUCKET);
+        this.tag(MILLSTONE_DOUGH_CONTAINER).add(WATER_BUCKET);
 
         this.addModItems();
         this.addPotIngredient();
@@ -63,18 +76,28 @@ public class TagItem extends ItemTagsProvider {
         tag(ItemTags.SHOVELS).add(ModItems.KITCHEN_SHOVEL.get());
         tag(ItemTags.SWORDS).addTag(KITCHEN_KNIFE);
         tag(EXTINGUISH_STOVE).addTag(ItemTags.SHOVELS);
-        tag(ItemTags.CHICKEN_FOOD).addTag(COOKERY_MOD_SEEDS).add(ModItems.RICE_SEED.get());
-        tag(ItemTags.PARROT_FOOD).addTag(COOKERY_MOD_SEEDS).add(ModItems.RICE_SEED.get());
+        tag(VILLAGER_PLANTABLE_SEEDS).add(ModItems.TOMATO_SEED.get(),
+                ModItems.CHILI_SEED.get(), ModItems.LETTUCE_SEED.get()
+        );
+        tag(Tags.Items.SEEDS).add(ModItems.TOMATO_SEED.get(), ModItems.CHILI_SEED.get(),
+                ModItems.LETTUCE_SEED.get());
 
         // 社区兼容
         tag(TagCommon.CROPS_CHILI_PEPPER).add(ModItems.RED_CHILI.get(), ModItems.GREEN_CHILI.get());
         tag(TagCommon.CROPS_TOMATO).add(ModItems.TOMATO.get());
         tag(TagCommon.CROPS_LETTUCE).add(ModItems.LETTUCE.get());
         tag(TagCommon.CROPS_RICE).add(ModItems.RICE_SEED.get());
+        tag(TagCommon.CROPS).addTag(TagCommon.CROPS_CHILI_PEPPER)
+                .addTag(TagCommon.CROPS_TOMATO)
+                .addTag(TagCommon.CROPS_LETTUCE)
+                .addTag(TagCommon.CROPS_RICE);
 
         tag(TagCommon.VEGETABLES_CHILI_PEPPER).add(ModItems.RED_CHILI.get(), ModItems.GREEN_CHILI.get());
         tag(TagCommon.VEGETABLES_TOMATO).add(ModItems.TOMATO.get());
         tag(TagCommon.VEGETABLES_LETTUCE).add(ModItems.LETTUCE.get());
+        tag(TagCommon.VEGETABLES).addTag(TagCommon.VEGETABLES_CHILI_PEPPER)
+                .addTag(TagCommon.VEGETABLES_TOMATO)
+                .addTag(TagCommon.VEGETABLES_LETTUCE);
 
         tag(TagCommon.SEEDS_CHILI_PEPPER).add(ModItems.CHILI_SEED.get());
         tag(TagCommon.SEEDS_TOMATO).add(ModItems.TOMATO_SEED.get());
@@ -97,6 +120,26 @@ public class TagItem extends ItemTagsProvider {
         tag(TagCommon.RAW_FISHES_TROPICAL).add(ModItems.SASHIMI.get());
         tag(TagCommon.RAW_FISHES_COD).add(COD);
         tag(TagCommon.RAW_FISHES_SALMON).add(SALMON);
+
+        tag(TagCommon.RAW_MEATS).addTag(TagCommon.RAW_BEEF)
+                .addTag(TagCommon.RAW_CHICKEN)
+                .addTag(TagCommon.RAW_PORK)
+                .addTag(TagCommon.RAW_MUTTON)
+                .addTag(TagCommon.RAW_FISHES_COD)
+                .addTag(TagCommon.RAW_FISHES_SALMON)
+                .addTag(TagCommon.RAW_FISHES_TROPICAL);
+
+        tag(TagCommon.DOUGH).add(ModItems.RAW_DOUGH.get());
+
+        // 均衡饮食兼容
+        tag(TagCommon.GRAINS).add(ModItems.RICE_SEED.get(), ModItems.RICE_PANICLE.get());
+        tag(TagCommon.PROTEINS).add(ModItems.CATERPILLAR.get());
+        tag(TagCommon.DIET_VEGETABLES).addTag(TagCommon.VEGETABLES);
+
+        // 兼容静谧四季
+        tag(TagCommon.SPRING_CROPS).add(ModItems.LETTUCE_SEED.get());
+        tag(TagCommon.SUMMER_CROPS).add(ModItems.TOMATO_SEED.get(), ModItems.CHILI_SEED.get(), ModItems.RICE_SEED.get(), ModItems.WILD_RICE_SEED.get());
+        tag(TagCommon.AUTUMN_CROPS).add(ModItems.TOMATO_SEED.get(), ModItems.CHILI_SEED.get(), ModItems.LETTUCE_SEED.get(), ModItems.RICE_SEED.get(), ModItems.WILD_RICE_SEED.get());
     }
 
     private void addModItems() {
@@ -125,6 +168,10 @@ public class TagItem extends ItemTagsProvider {
                         TagCommon.SEEDS_LETTUCE,
                         TagCommon.SEEDS_RICE,
                         Tags.Items.EGGS
+                ).add(
+                        ModItems.RAW_DOUGH.get(),
+                        ModItems.RAW_NOODLES.get(),
+                        ModItems.STUFFED_DOUGH_FOOD.get()
                 ).add(
                         STONE,
                         GRANITE,
@@ -876,7 +923,6 @@ public class TagItem extends ItemTagsProvider {
                         NETHERITE_INGOT,
                         NETHERITE_SCRAP,
                         STICK,
-                        BOWL,
                         MUSHROOM_STEW,
                         STRING,
                         FEATHER,
@@ -912,7 +958,6 @@ public class TagItem extends ItemTagsProvider {
                         BAMBOO_HANGING_SIGN,
                         CRIMSON_HANGING_SIGN,
                         WARPED_HANGING_SIGN,
-                        BUCKET,
                         WATER_BUCKET,
                         LAVA_BUCKET,
                         POWDER_SNOW_BUCKET,
@@ -999,7 +1044,6 @@ public class TagItem extends ItemTagsProvider {
                         GOLD_NUGGET,
                         NETHER_WART,
                         POTION,
-                        GLASS_BOTTLE,
                         SPIDER_EYE,
                         FERMENTED_SPIDER_EYE,
                         BLAZE_POWDER,

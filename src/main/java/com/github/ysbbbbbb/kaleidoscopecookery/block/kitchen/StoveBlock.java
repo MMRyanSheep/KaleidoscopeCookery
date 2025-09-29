@@ -16,8 +16,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -110,24 +108,6 @@ public class StoveBlock extends HorizontalDirectionalBlock {
             level.setBlockAndUpdate(pos, blockState.setValue(LIT, false));
             level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
-    }
-
-    @Override
-    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
-        if (state.getValue(LIT)
-            && level instanceof ServerLevel serverLevel
-            && entity instanceof LivingEntity livingEntity
-            && !livingEntity.isSteppingCarefully()
-            && !livingEntity.isInvulnerable()
-            && livingEntity.invulnerableTime <= 10) {
-            // 排除创造模式玩家
-            if (livingEntity instanceof Player player && player.isCreative()) {
-                return;
-            }
-            livingEntity.invulnerableTime = 20;
-            serverLevel.broadcastDamageEvent(livingEntity, livingEntity.damageSources().hotFloor());
-        }
-        super.stepOn(level, pos, state, entity);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.client.event;
 
 import com.github.ysbbbbbb.kaleidoscopecookery.KaleidoscopeCookery;
+import com.github.ysbbbbbb.kaleidoscopecookery.client.resources.ItemRenderReplacer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
@@ -26,6 +27,19 @@ public class ModModelEvent {
 
         resourceManager.listResources(MODELS_CARPET, id -> id.getPath().endsWith(JSON))
                 .keySet().stream().map(ModModelEvent::handleModelId).forEach(event::register);
+
+        // 额外添加的模型注册
+        // 蜂蜜瓶，用来替换锅内渲染
+        event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "item/honey")));
+        // 鸡蛋，用来替换锅内渲染
+        event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "item/egg")));
+        // 面团
+        event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "item/raw_dough_in_millstone")));
+        // 油
+        event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "item/oil_in_millstone")));
+
+        // 重置缓存
+        ItemRenderReplacer.resetCache();
     }
 
     private static ModelResourceLocation handleModelId(ResourceLocation input) {

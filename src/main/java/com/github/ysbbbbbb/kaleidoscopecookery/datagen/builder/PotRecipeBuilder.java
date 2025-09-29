@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -56,7 +57,7 @@ public class PotRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
-    @SuppressWarnings("all")
+    @SuppressWarnings({"varargs", "all"})
     public PotRecipeBuilder addInput(Object... ingredients) {
         for (Object ingredient : ingredients) {
             if (ingredient instanceof ItemLike itemLike) {
@@ -67,6 +68,8 @@ public class PotRecipeBuilder implements RecipeBuilder {
                 this.ingredients.add(Ingredient.of(tagKey));
             } else if (ingredient instanceof Ingredient ingredientObj) {
                 this.ingredients.add(ingredientObj);
+            } else if (ingredient instanceof DeferredItem<?> deferredItem) {
+                this.ingredients.add(Ingredient.of(deferredItem.get()));
             }
         }
         return this;

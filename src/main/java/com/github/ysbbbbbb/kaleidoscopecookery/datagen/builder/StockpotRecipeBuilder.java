@@ -14,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class StockpotRecipeBuilder implements RecipeBuilder {
     private List<Ingredient> ingredients = Lists.newArrayList();
     private ItemStack result = ItemStack.EMPTY;
     private int time = StockpotRecipeSerializer.DEFAULT_TIME;
+    private Ingredient carrier = StockpotRecipeSerializer.DEFAULT_CARRIER;
     private ResourceLocation soupBase = StockpotRecipeSerializer.DEFAULT_SOUP_BASE;
     private ResourceLocation cookingTexture = StockpotRecipeSerializer.DEFAULT_COOKING_TEXTURE;
     private ResourceLocation finishedTexture = StockpotRecipeSerializer.DEFAULT_FINISHED_TEXTURE;
@@ -45,6 +47,8 @@ public class StockpotRecipeBuilder implements RecipeBuilder {
                 this.ingredients.add(Ingredient.of(tagKey));
             } else if (ingredient instanceof Ingredient ingredientObj) {
                 this.ingredients.add(ingredientObj);
+            } else if (ingredient instanceof DeferredItem<?> deferredItem) {
+                this.ingredients.add(Ingredient.of(deferredItem.get()));
             }
         }
         return this;
@@ -76,6 +80,11 @@ public class StockpotRecipeBuilder implements RecipeBuilder {
 
     public StockpotRecipeBuilder setTime(int time) {
         this.time = time;
+        return this;
+    }
+
+    public StockpotRecipeBuilder setCarrier(ItemLike carrier) {
+        this.carrier = Ingredient.of(carrier);
         return this;
     }
 
@@ -135,7 +144,7 @@ public class StockpotRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        recipeOutput.accept(id, new StockpotRecipe(this.ingredients, this.soupBase, this.result,
-                this.time, this.cookingTexture, this.finishedTexture, this.cookingBubbleColor, this.finishedBubbleColor), null);
+        recipeOutput.accept(id, new StockpotRecipe(this.ingredients, this.soupBase, this.result, this.time, this.carrier,
+                this.cookingTexture, this.finishedTexture, this.cookingBubbleColor, this.finishedBubbleColor), null);
     }
 }

@@ -1,0 +1,13 @@
+{
+  "type": "kaleidoscope_cookery:millstone",
+  "carrier": {
+    "tag": "kaleidoscope_cookery:millstone_dough_container"
+  },
+  "ingredient": {
+    "item": "minecraft:wheat"
+  },
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:raw_dough"
+  }
+}

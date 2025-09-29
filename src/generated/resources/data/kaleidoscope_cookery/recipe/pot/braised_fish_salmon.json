@@ -5,10 +5,22 @@
   },
   "ingredients": [
     {
-      "tag": "c:foods/raw_salmon"
+      "tag": "c:raw_fishes/salmon"
     },
     {
-      "tag": "c:foods/raw_salmon"
+      "tag": "c:raw_fishes/salmon"
+    },
+    {
+      "tag": "c:raw_fishes/salmon"
+    },
+    {
+      "tag": "c:raw_fishes/salmon"
+    },
+    {
+      "tag": "c:raw_fishes/salmon"
+    },
+    {
+      "tag": "c:raw_fishes/salmon"
     }
   ],
   "result": {

@@ -14,7 +14,13 @@
       "item": "minecraft:amethyst_shard"
     },
     {
-      "tag": "c:foods/raw_mutton"
+      "tag": "c:raw_mutton"
+    },
+    {
+      "tag": "c:raw_mutton"
+    },
+    {
+      "tag": "c:raw_mutton"
     }
   ],
   "result": {

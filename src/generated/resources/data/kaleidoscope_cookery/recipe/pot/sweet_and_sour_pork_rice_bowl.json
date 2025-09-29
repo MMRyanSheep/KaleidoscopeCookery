@@ -11,10 +11,13 @@
       "item": "minecraft:sugar"
     },
     {
-      "tag": "c:foods/raw_pork"
+      "item": "minecraft:sugar"
     },
     {
-      "tag": "c:foods/raw_pork"
+      "tag": "c:raw_pork"
+    },
+    {
+      "tag": "c:raw_pork"
     }
   ],
   "result": {

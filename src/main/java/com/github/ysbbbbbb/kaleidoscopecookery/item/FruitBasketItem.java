@@ -17,15 +17,29 @@ import java.util.List;
 import java.util.Optional;
 
 public class FruitBasketItem extends BlockItem {
+    private static final int MAX_SLOTS = 8;
+
     public FruitBasketItem() {
         super(ModBlocks.FRUIT_BASKET.get(), new Properties().stacksTo(1));
     }
 
+    public static ItemStackHandler getItems(ItemStack stack) {
+        ItemContainer container = stack.get(ModDataComponents.FRUIT_BASKET_ITEMS);
+        if (container != null) {
+            return container.items();
+        }
+        return new ItemStackHandler(MAX_SLOTS);
+    }
+
+    public static void saveItems(ItemStack stack, ItemStackHandler items) {
+        stack.set(ModDataComponents.FRUIT_BASKET_ITEMS, new ItemContainer(items));
+    }
+
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
-        if (stack.has(ModDataComponents.FRUIT_BASKET_ITEMS)) {
-            ItemStackHandler handler = stack.get(ModDataComponents.FRUIT_BASKET_ITEMS).items();
-            return Optional.of(new ItemContainerTooltip(handler));
+        ItemContainer container = stack.get(ModDataComponents.FRUIT_BASKET_ITEMS);
+        if (container != null) {
+            return Optional.of(new ItemContainerTooltip(container.items()));
         }
         return Optional.empty();
     }

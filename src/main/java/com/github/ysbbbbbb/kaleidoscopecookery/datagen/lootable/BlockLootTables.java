@@ -61,6 +61,8 @@ public class BlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.POT.get());
         dropSelf(ModBlocks.CHOPPING_BOARD.get());
 
+        dropSelf(ModBlocks.OIL_POT.get());
+
         dropSelf(ModBlocks.COOK_STOOL_OAK.get());
         dropSelf(ModBlocks.COOK_STOOL_SPRUCE.get());
         dropSelf(ModBlocks.COOK_STOOL_ACACIA.get());
@@ -102,6 +104,7 @@ public class BlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.KITCHENWARE_RACKS.get());
         dropSelf(ModBlocks.STRAW_BLOCK.get());
         dropSelf(ModBlocks.SHAWARMA_SPIT.get());
+        dropSelf(ModBlocks.OIL_BLOCK.get());
 
         this.add(ModBlocks.TOMATO_CROP.get(), createCropDrops(ModBlocks.TOMATO_CROP.get(), ModItems.TOMATO.get(),
                 ModItems.TOMATO_SEED.get(), createCropBuilder(ModBlocks.TOMATO_CROP.get())));

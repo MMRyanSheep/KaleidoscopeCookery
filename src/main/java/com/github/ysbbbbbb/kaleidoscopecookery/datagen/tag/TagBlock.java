@@ -2,10 +2,13 @@ package com.github.ysbbbbbb.kaleidoscopecookery.datagen.tag;
 
 import com.github.ysbbbbbb.kaleidoscopecookery.KaleidoscopeCookery;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModBlocks;
+import com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagCommon;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -20,7 +23,7 @@ public class TagBlock extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.STOVE.get(), ModBlocks.POT.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.STOVE.get(), ModBlocks.POT.get(), ModBlocks.MILLSTONE.get());
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
                 ModBlocks.COOK_STOOL_OAK.get(), ModBlocks.COOK_STOOL_SPRUCE.get(),
                 ModBlocks.COOK_STOOL_ACACIA.get(), ModBlocks.COOK_STOOL_BAMBOO.get(),
@@ -58,5 +61,45 @@ public class TagBlock extends BlockTagsProvider {
                 ModBlocks.CHAIR_JUNGLE.get(), ModBlocks.CHAIR_MANGROVE.get(),
                 ModBlocks.CHAIR_WARPED.get());
         this.tag(TagMod.HEAT_SOURCE_BLOCKS_WITHOUT_LIT).add(Blocks.FIRE, Blocks.SOUL_FIRE, Blocks.LAVA, Blocks.MAGMA_BLOCK);
+        this.tag(BlockTags.CROPS).add(ModBlocks.TOMATO_CROP.get(),
+                ModBlocks.RICE_CROP.get(), ModBlocks.CHILI_CROP.get(),
+                ModBlocks.LETTUCE_CROP.get());
+        this.tag(BlockTags.BEE_GROWABLES).add(ModBlocks.RICE_CROP.get());
+
+        // 兼容静谧四季模组
+        this.tag(TagCommon.SPRING_CROPS_BLOCK).add(
+                ModBlocks.LETTUCE_CROP.get()
+        );
+        this.tag(TagCommon.SUMMER_CROPS_BLOCK).add(
+                ModBlocks.TOMATO_CROP.get(), ModBlocks.RICE_CROP.get(),
+                ModBlocks.CHILI_CROP.get()
+        );
+        this.tag(TagCommon.AUTUMN_CROPS_BLOCK).add(
+                ModBlocks.TOMATO_CROP.get(), ModBlocks.RICE_CROP.get(),
+                ModBlocks.LETTUCE_CROP.get(), ModBlocks.CHILI_CROP.get()
+        );
+
+        // 节气模组：湿度
+        this.tag(TagCommon.DRY_AVERAGE).add(
+                ModBlocks.TOMATO_CROP.get(),
+                ModBlocks.CHILI_CROP.get()
+        );
+        this.tag(TagCommon.AVERAGE_MOIST).add(
+                ModBlocks.TOMATO_CROP.get(),
+                ModBlocks.LETTUCE_CROP.get(),
+                ModBlocks.CHILI_CROP.get()
+        );
+        this.tag(TagCommon.MOIST_HUMID).add(
+                ModBlocks.LETTUCE_CROP.get(),
+                ModBlocks.RICE_CROP.get()
+        );
+        this.tag(TagCommon.HUMID_HUMID).add(
+                ModBlocks.RICE_CROP.get()
+        );
+
+        // carry on 模组黑名单
+        IntrinsicTagAppender<Block> carryOn = this.tag(TagCommon.CARRYON_BLOCK_BLACKLIST);
+        BuiltInRegistries.BLOCK.keySet().stream().filter(id -> id.getNamespace().equals(KaleidoscopeCookery.MOD_ID))
+                .forEach(id -> carryOn.add(BuiltInRegistries.BLOCK.get(id)));
     }
 }

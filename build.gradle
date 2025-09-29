@@ -130,6 +130,11 @@ dependencies {
     compileOnly "dev.emi:emi-neoforge:1.1.22+1.21.1:api"
     implementation "dev.emi:emi-neoforge:1.1.22+1.21.1"
 
+    // REI
+    compileOnly "maven.modrinth:cloth-config:15.0.140+neoforge"
+    compileOnly "maven.modrinth:architectury-api:13.0.8+neoforge"
+    compileOnly "maven.modrinth:rei:16.0.788+neoforge"
+
     implementation "maven.modrinth:jade:15.0.5+neoforge"
 
     // KubeJS
@@ -138,9 +143,27 @@ dependencies {
     runtimeOnly "com.github.rtyley:animated-gif-lib-for-java:animated-gif-lib-1.7"
     runtimeOnly "curse.maven:probejs-585406:5820894"
 
+    // 背包
+    runtimeOnly "maven.modrinth:sophisticated-core:1.21.1-1.3.50.1004"
+    runtimeOnly "maven.modrinth:sophisticated-backpacks:1.21.1-3.24.15.1250"
+
+    // Farmer's Delight
+    implementation "maven.modrinth:farmers-delight:1.21.1-1.2.8-neoforge"
+
+    implementation "maven.modrinth:harvest-with-ease:9.4.0-neoforge,1.21.1"
+    runtimeOnly "maven.modrinth:cobweb:1.3.3-neoforge,1.21.1"
+
+    // runtimeOnly "maven.modrinth:diet:2.1.1+1.20.1-forge"
     runtimeOnly 'curse.maven:touhou-little-maid-355044:6613831-sources-6613865'
     runtimeOnly "maven.modrinth:appleskin:3.0.7+mc1.21-neoforge"
-    runtimeOnly "maven.modrinth:farmers-delight:1.21.1-1.2.8-neoforge"
+    runtimeOnly "maven.modrinth:just-enough-effect-descriptions-jeed:1.21-2.2.19-neoforge"
+    runtimeOnly "maven.modrinth:carry-on:2.2.2-neoforge"
+    // runtimeOnly "curse.maven:ecliptic-seasons-1118306:7041469"
+
+    runtimeOnly "maven.modrinth:nbtedit-reborn:5.2.11+mc1.21.1-neoforge"
+    runtimeOnly "maven.modrinth:kiwi:15.6.1+neoforge"
+
+    runtimeOnly "maven.modrinth:food-effect-tooltips-forge:1.4.0-neoforge,1.21.1"
 }
 
 tasks.withType(ProcessResources).configureEach {

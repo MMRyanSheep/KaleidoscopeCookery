@@ -31,6 +31,25 @@ public class SoundDefinitionsGenerator extends SoundDefinitionsProvider {
                 .with(sound("entity/fart/fart_1"))
                 .with(sound("entity/fart/fart_2"));
         this.add(ModSounds.ENTITY_FART.get(), fartSound);
+
+        SoundDefinition millstoneSound = definition().subtitle(subtitle("block.millstone"))
+                .with(sound("block/millstone/millstone_0"))
+                .with(sound("block/millstone/millstone_1"))
+                .with(sound("block/millstone/millstone_2"))
+                .with(sound("block/millstone/millstone_3"))
+                .with(sound("block/millstone/millstone_4"))
+                .with(sound("block/millstone/millstone_5"));
+        this.add(ModSounds.BLOCK_MILLSTONE.get(), millstoneSound);
+
+        SoundDefinition recipeBlockSound = definition().subtitle(subtitle("block.recipe_block"))
+                .with(sound("block/recipe_block/recipe_block_0"))
+                .with(sound("block/recipe_block/recipe_block_1"))
+                .with(sound("block/recipe_block/recipe_block_2"));
+        this.add(ModSounds.BLOCK_RECIPE_BLOCK.get(), recipeBlockSound);
+
+        SoundDefinition doughTransformSound = definition().subtitle(subtitle("item.dough_transform"))
+                .with(sound("item/dough_transform"));
+        this.add(ModSounds.ITEM_DOUGH_TRANSFORM.get(), doughTransformSound);
     }
 
     protected static SoundDefinition.Sound sound(final String name) {

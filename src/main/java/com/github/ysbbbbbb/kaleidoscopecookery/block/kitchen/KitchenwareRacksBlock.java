@@ -121,6 +121,21 @@ public class KitchenwareRacksBlock extends HorizontalDirectionalBlock implements
     }
 
     @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide && player.isCreative() && level.getBlockEntity(pos) instanceof KitchenwareRacksBlockEntity racks) {
+            if (!racks.getItemLeft().isEmpty()) {
+                popResource(level, pos, racks.getItemLeft());
+                racks.setItemLeft(ItemStack.EMPTY);
+            }
+            if (!racks.getItemRight().isEmpty()) {
+                popResource(level, pos, racks.getItemRight());
+                racks.setItemRight(ItemStack.EMPTY);
+            }
+        }
+        return super.playerWillDestroy(level, pos, state, player);
+    }
+
+    @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder lootParamsBuilder) {
         List<ItemStack> drops = super.getDrops(state, lootParamsBuilder);
         BlockEntity parameter = lootParamsBuilder.getParameter(LootContextParams.BLOCK_ENTITY);

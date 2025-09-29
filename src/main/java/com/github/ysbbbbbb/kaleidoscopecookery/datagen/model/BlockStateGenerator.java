@@ -59,10 +59,16 @@ public class BlockStateGenerator extends BlockStateProvider {
                 if (blockState.getValue(StockpotBlock.HAS_BASE)) {
                     return new ModelFile.UncheckedModelFile(modLoc("block/stockpot_base_has_lid"));
                 }
+                if (blockState.getValue(StockpotBlock.HAS_CHAINS)) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/stockpot_chains_has_lid"));
+                }
                 return new ModelFile.UncheckedModelFile(modLoc("block/stockpot_has_lid"));
             } else {
                 if (blockState.getValue(StockpotBlock.HAS_BASE)) {
                     return new ModelFile.UncheckedModelFile(modLoc("block/stockpot_base"));
+                }
+                if (blockState.getValue(StockpotBlock.HAS_CHAINS)) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/stockpot_chains"));
                 }
                 return new ModelFile.UncheckedModelFile(modLoc("block/stockpot"));
             }
@@ -79,6 +85,38 @@ public class BlockStateGenerator extends BlockStateProvider {
                     return new ModelFile.UncheckedModelFile(modLoc("block/shawarma_spit_lower"));
                 }
                 return new ModelFile.UncheckedModelFile(modLoc("block/shawarma_spit_upper"));
+            }
+        });
+
+        horizontalBlock(ModBlocks.OIL_POT.get(), blockState -> {
+            if (blockState.getValue(OilPotBlock.OIL_COUNT) <= 0) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/oil_pot"));
+            } else {
+                return new ModelFile.UncheckedModelFile(modLoc("block/oil_pot_with_oil"));
+            }
+        });
+
+        horizontalBlock(ModBlocks.STEAMER.get(), blockState -> {
+            boolean hasLid = blockState.getValue(SteamerBlock.HAS_LID);
+            boolean hasBase = blockState.getValue(SteamerBlock.HAS_BASE);
+            boolean half = blockState.getValue(SteamerBlock.HALF);
+
+            if (hasLid && hasBase && half) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_half_lid_base"));
+            } else if (hasLid && hasBase) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_full_lid_base"));
+            } else if (hasLid && half) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_half_lid"));
+            } else if (hasLid) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_full_lid"));
+            } else if (hasBase && half) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_half_base"));
+            } else if (hasBase) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_full_base"));
+            } else if (half) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_half"));
+            } else {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_full"));
             }
         });
 
@@ -134,6 +172,8 @@ public class BlockStateGenerator extends BlockStateProvider {
         crop(ModBlocks.LETTUCE_CROP, "lettuce");
 
         axisBlock((RotatedPillarBlock) ModBlocks.STRAW_BLOCK.get());
+
+        horizontalFaceBlock(ModBlocks.RECIPE_BLOCK.get(), new ModelFile.UncheckedModelFile(modLoc("block/recipe_block")));
 
         riceCrop();
 

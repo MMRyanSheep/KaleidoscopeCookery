@@ -5,7 +5,6 @@ import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.ShawarmaSpitBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.BaseBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModBlocks;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModParticles;
-import com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod;
 import com.github.ysbbbbbb.kaleidoscopecookery.util.ItemUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -92,7 +91,7 @@ public class ShawarmaSpitBlockEntity extends BaseBlockEntity implements IShawarm
         this.cookTime = 0;
         this.refresh();
 
-        if (!mainHandItem.is(TagMod.KITCHEN_KNIFE) && this.getBlockState().getValue(ShawarmaSpitBlock.POWERED)) {
+        if (this.getBlockState().getValue(ShawarmaSpitBlock.POWERED)) {
             entity.hurt(level.damageSources().inFire(), 1);
         }
         ItemUtils.getItemToLivingEntity(entity, copy);

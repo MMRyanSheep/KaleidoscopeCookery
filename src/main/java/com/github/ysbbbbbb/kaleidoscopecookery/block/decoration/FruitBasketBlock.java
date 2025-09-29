@@ -6,13 +6,17 @@ import com.github.ysbbbbbb.kaleidoscopecookery.init.ModDataComponents;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModItems;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.FruitBasketItem;
 import com.mojang.serialization.MapCodec;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -88,8 +92,9 @@ public class FruitBasketBlock extends HorizontalDirectionalBlock implements Enti
                 fruitBasket.takeOut(player);
                 return ItemInteractionResult.SUCCESS;
             }
-            if (!player.getMainHandItem().isEmpty()) {
-                fruitBasket.putOn(player.getMainHandItem());
+            ItemStack mainHandItem = player.getMainHandItem();
+            if (!mainHandItem.isEmpty() && !mainHandItem.is(ModItems.TRANSMUTATION_LUNCH_BAG.get())) {
+                fruitBasket.putOn(mainHandItem);
                 return ItemInteractionResult.SUCCESS;
             }
         }
@@ -104,6 +109,14 @@ public class FruitBasketBlock extends HorizontalDirectionalBlock implements Enti
                 basket.setItems(handler.items(), level.registryAccess());
             }
         }
+    }
+
+    @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide && player.isCreative()) {
+            dropResources(state, level, pos, level.getBlockEntity(pos), player, player.getMainHandItem());
+        }
+        return super.playerWillDestroy(level, pos, state, player);
     }
 
     @Override
@@ -156,5 +169,10 @@ public class FruitBasketBlock extends HorizontalDirectionalBlock implements Enti
             return NORTH_SOUTH;
         }
         return EAST_WEST;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        tooltip.add(Component.translatable("tooltip.kaleidoscope_cookery.fruit_basket").withStyle(ChatFormatting.GRAY));
     }
 }

@@ -2,8 +2,8 @@ package com.github.ysbbbbbb.kaleidoscopecookery.event.effect;
 
 import com.github.ysbbbbbb.kaleidoscopecookery.KaleidoscopeCookery;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModEffects;
-import com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
@@ -20,7 +20,7 @@ public class PreservationEvent {
     public static void onEatFood(LivingEntityUseItemEvent.Finish event) {
         ItemStack stack = event.getItem();
         LivingEntity entity = event.getEntity();
-        if (entity.hasEffect(ModEffects.PRESERVATION) && stack.is(TagMod.PRESERVATION_FOOD)) {
+        if (stack.has(DataComponents.FOOD) && entity.hasEffect(ModEffects.PRESERVATION)) {
             FoodProperties foodProperties = stack.getFoodProperties(entity);
             if (foodProperties == null) {
                 return;

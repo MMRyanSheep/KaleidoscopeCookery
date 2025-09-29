@@ -3,6 +3,7 @@ package com.github.ysbbbbbb.kaleidoscopecookery.init;
 import com.github.ysbbbbbb.kaleidoscopecookery.KaleidoscopeCookery;
 import com.github.ysbbbbbb.kaleidoscopecookery.entity.ScarecrowEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.entity.SitEntity;
+import com.github.ysbbbbbb.kaleidoscopecookery.entity.ThrowableBaoziEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -18,6 +19,7 @@ public class ModEntities {
 
     public static Supplier<EntityType<SitEntity>> SIT = ENTITY_TYPES.register("sit", () -> SitEntity.TYPE);
     public static Supplier<EntityType<ScarecrowEntity>> SCARECROW = ENTITY_TYPES.register("scarecrow", () -> ScarecrowEntity.TYPE);
+    public static Supplier<EntityType<ThrowableBaoziEntity>> THROWABLE_BAOZI = ENTITY_TYPES.register("throwable_baozi", () -> ThrowableBaoziEntity.TYPE);
 
     @SubscribeEvent
     public static void addEntityAttributeEvent(EntityAttributeCreationEvent event) {

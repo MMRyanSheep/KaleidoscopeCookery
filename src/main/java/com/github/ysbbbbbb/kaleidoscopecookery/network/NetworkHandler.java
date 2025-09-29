@@ -1,6 +1,6 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.network;
 
-import com.github.ysbbbbbb.kaleidoscopecookery.network.message.FlatulenceMessage;
+import com.github.ysbbbbbb.kaleidoscopecookery.network.message.SimpleC2SModMessage;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
@@ -10,6 +10,6 @@ public class NetworkHandler {
     public static void registerPacket(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar(VERSION);
 
-        registrar.playToServer(FlatulenceMessage.TYPE, FlatulenceMessage.STREAM_CODEC, FlatulenceMessage::handle);
+        registrar.playToServer(SimpleC2SModMessage.TYPE, SimpleC2SModMessage.STREAM_CODEC, SimpleC2SModMessage::handle);
     }
 }

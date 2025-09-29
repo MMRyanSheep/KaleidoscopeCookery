@@ -12,7 +12,10 @@ public class ModSounds {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_STOCKPOT = registerSound("block.stockpot");
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_PADDY = registerSound("block.paddy");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_MILLSTONE = registerSound("block.millstone");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_RECIPE_BLOCK = registerSound("block.recipe_block");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_FART = registerSound("entity.fart");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_DOUGH_TRANSFORM = registerSound("item.dough_transform");
 
     private static DeferredHolder<SoundEvent, SoundEvent> registerSound(String name) {
         return SOUND_EVENTS.register(name, () -> SoundEvent.createFixedRangeEvent(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, name), 16.0F));

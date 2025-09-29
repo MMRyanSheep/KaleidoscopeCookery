@@ -5,10 +5,19 @@
   },
   "ingredients": [
     {
-      "tag": "c:foods/raw_salmon"
+      "tag": "c:raw_fishes/salmon"
     },
     {
-      "tag": "c:crops/chilipepper"
+      "tag": "c:raw_fishes/salmon"
+    },
+    {
+      "tag": "c:raw_fishes/salmon"
+    },
+    {
+      "tag": "c:raw_fishes/salmon"
+    },
+    {
+      "tag": "c:raw_fishes/salmon"
     }
   ],
   "result": {

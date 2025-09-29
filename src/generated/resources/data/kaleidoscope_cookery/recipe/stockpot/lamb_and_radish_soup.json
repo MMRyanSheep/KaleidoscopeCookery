@@ -8,10 +8,19 @@
       "item": "minecraft:carrot"
     },
     {
-      "tag": "c:foods/raw_mutton"
+      "item": "minecraft:carrot"
     },
     {
-      "tag": "c:foods/raw_mutton"
+      "item": "minecraft:carrot"
+    },
+    {
+      "tag": "c:raw_mutton"
+    },
+    {
+      "tag": "c:raw_mutton"
+    },
+    {
+      "tag": "c:raw_mutton"
     }
   ],
   "result": {
