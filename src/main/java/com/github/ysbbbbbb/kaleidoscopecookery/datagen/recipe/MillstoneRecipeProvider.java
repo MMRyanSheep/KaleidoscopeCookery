@@ -3,15 +3,10 @@ package com.github.ysbbbbbb.kaleidoscopecookery.datagen.recipe;
 import com.github.ysbbbbbb.kaleidoscopecookery.datagen.builder.MillstoneRecipeBuilder;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModItems;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
@@ -440,11 +435,9 @@ public class MillstoneRecipeProvider extends ModRecipeProvider {
                 .setResult(Items.STRING, 3)
                 .save(consumer, "string_from_yellow_wool");
 
-        DataComponentPatch waterPotionCompo = DataComponentPatch.builder().set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.WATER)).build();
-        Holder<Item> potionHolder = BuiltInRegistries.ITEM.wrapAsHolder(Items.POTION);
-        ItemStack waterPotion = new ItemStack(potionHolder, 1, waterPotionCompo);
-
-        Ingredient waterPotionIngredient = DataComponentIngredient.of(false, waterPotion);
+        Ingredient waterPotionIngredient = DataComponentIngredient.of(false,
+                DataComponents.POTION_CONTENTS,
+                new PotionContents(Potions.WATER), Items.POTION);
         Ingredient tagIngredient = Ingredient.of(TagMod.MILLSTONE_DOUGH_CONTAINER);
         CompoundIngredient anyIngredients = new CompoundIngredient(List.of(waterPotionIngredient, tagIngredient));
 
