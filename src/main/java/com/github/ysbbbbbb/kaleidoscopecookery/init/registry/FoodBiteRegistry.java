@@ -162,7 +162,6 @@ public class FoodBiteRegistry {
 
         private FoodData(int maxBites, FoodProperties blockFood, FoodProperties itemFood) {
             this.maxBites = maxBites;
-            this.lootItems.add(Items.BOWL);
             this.blockFood = blockFood;
             this.itemFood = itemFood;
         }

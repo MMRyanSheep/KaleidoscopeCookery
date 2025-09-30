@@ -27,12 +27,21 @@ import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class BowlFoodBlockItem extends BlockItem implements IHasContainer {
     private final List<MobEffectInstance> effectInstances = Lists.newArrayList();
 
-    public BowlFoodBlockItem(Block pBlock, FoodProperties properties) {
-        super(pBlock, new Item.Properties().stacksTo(16).food(properties));
+    public BowlFoodBlockItem(Block block, FoodProperties properties) {
+        super(block, new Item.Properties().stacksTo(16).food(
+                new FoodProperties(
+                        properties.nutrition(),
+                        properties.saturation(),
+                        properties.canAlwaysEat(),
+                        properties.eatSeconds(),
+                        Optional.of(Items.BOWL.getDefaultInstance()),
+                        properties.effects())
+        ));
         properties.effects().forEach(effect -> {
             if (effect.probability() >= 1F) {
                 effectInstances.add(effect.effect());
