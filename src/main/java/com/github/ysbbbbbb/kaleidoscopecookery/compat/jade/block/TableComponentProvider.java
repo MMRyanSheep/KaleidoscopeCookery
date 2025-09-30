@@ -29,6 +29,9 @@ public enum TableComponentProvider implements IServerExtensionProvider<ItemStack
             List<ItemStack> list = Lists.newArrayList();
             for (int i = 0; i < handler.getSlots(); i++) {
                 ItemStack stack = handler.getStackInSlot(i);
+                if (stack.isEmpty()) {
+                    continue;
+                }
                 list.add(stack.copy());
             }
             return List.of(new ViewGroup<>(list));

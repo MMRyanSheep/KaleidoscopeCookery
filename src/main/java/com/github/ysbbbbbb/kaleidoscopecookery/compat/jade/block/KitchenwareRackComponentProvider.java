@@ -4,8 +4,6 @@ import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.KitchenwareRa
 import com.github.ysbbbbbb.kaleidoscopecookery.compat.jade.ModPlugin;
 import com.google.common.collect.Lists;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import snownee.jade.api.Accessor;
@@ -27,8 +25,12 @@ public enum KitchenwareRackComponentProvider implements IServerExtensionProvider
         Object target = accessor.getTarget();
         if (target instanceof KitchenwareRacksBlockEntity kitchenwareRacks) {
             List<ItemStack> list = Lists.newArrayList();
-            list.add(kitchenwareRacks.getItemLeft());
-            list.add(kitchenwareRacks.getItemRight());
+            if (!kitchenwareRacks.getItemLeft().isEmpty()) {
+                list.add(kitchenwareRacks.getItemLeft());
+            }
+            if (!kitchenwareRacks.getItemRight().isEmpty()) {
+                list.add(kitchenwareRacks.getItemRight());
+            }
             return List.of(new ViewGroup<>(list));
         }
         return null;

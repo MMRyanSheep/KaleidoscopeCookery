@@ -25,7 +25,8 @@ public enum StockpotComponentProvider implements IServerExtensionProvider<ItemSt
         Object target = accessor.getTarget();
         if (target instanceof StockpotBlockEntity stockpot) {
             if (stockpot.getStatus() < IStockpot.FINISHED) {
-                return List.of(new ViewGroup<>(stockpot.getInputs()));
+                List<ItemStack> list = stockpot.getInputs().stream().filter(s -> !s.isEmpty()).toList();
+                return List.of(new ViewGroup<>(list));
             }
         }
         return null;

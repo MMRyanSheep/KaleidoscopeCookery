@@ -23,7 +23,8 @@ public enum SteamerComponentProvider implements IServerExtensionProvider<ItemSta
     public List<ViewGroup<ItemStack>> getGroups(Accessor<?> accessor) {
         Object target = accessor.getTarget();
         if (target instanceof SteamerBlockEntity steamer) {
-            return List.of(new ViewGroup<>(steamer.getItems()));
+            List<ItemStack> list = steamer.getItems().stream().filter(s -> !s.isEmpty()).toList();
+            return List.of(new ViewGroup<>(list));
         }
         return null;
     }
