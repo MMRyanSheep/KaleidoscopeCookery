@@ -1,10 +1,15 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen;
 
+import com.github.ysbbbbbb.kaleidoscopecookery.advancements.critereon.ModEventTriggerType;
+import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.MillstoneBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModItems;
+import com.github.ysbbbbbb.kaleidoscopecookery.init.ModTrigger;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.OilPotItem;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -69,6 +74,14 @@ public class OilPotBlock extends HorizontalDirectionalBlock implements SimpleWat
             levelAccessor.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
         }
         return super.updateShape(state, direction, neighborState, levelAccessor, pos, neighborPos);
+    }
+
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        // 如果油壶正上方是石磨，那么触发成就
+        if (placer instanceof ServerPlayer player && level.getBlockEntity(pos.above()) instanceof MillstoneBlockEntity) {
+            ModTrigger.EVENT.get().trigger(player, ModEventTriggerType.USE_MILLSTONE_GET_OIL_POT);
+        }
     }
 
     @Override
