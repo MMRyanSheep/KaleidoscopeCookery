@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -22,6 +23,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 
 public class MillstoneBlockEntityRender implements BlockEntityRenderer<MillstoneBlockEntity> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "textures/block/millstone.png");
@@ -102,5 +104,15 @@ public class MillstoneBlockEntityRender implements BlockEntityRenderer<Millstone
     @Override
     public boolean shouldRenderOffScreen(MillstoneBlockEntity millstone) {
         return true;
+    }
+
+    @Override
+    public AABB getRenderBoundingBox(MillstoneBlockEntity blockEntity) {
+        BlockPos pos = blockEntity.getBlockPos();
+        return getAABB(pos.offset(-3, 0, -3), pos.offset(3, 1, 3));
+    }
+
+    private static AABB getAABB(BlockPos pStart, BlockPos pEnd) {
+        return new AABB(pStart.getX(), pStart.getY(), pStart.getZ(), pEnd.getX(), pEnd.getY(), pEnd.getZ());
     }
 }
