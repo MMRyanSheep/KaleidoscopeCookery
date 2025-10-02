@@ -46,7 +46,7 @@ public record ItemRenderReplacer(Map<ResourceLocation, Object> pot,
                 return modelManager.getModel(modelRl);
             }
             if (id instanceof ResourceLocation rl) {
-                return modelManager.getModel(ModelResourceLocation.inventory(rl));
+                return modelManager.getModel(ModelResourceLocation.standalone(rl));
             }
             return modelManager.getMissingModel();
         });
