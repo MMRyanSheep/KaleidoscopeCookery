@@ -7,7 +7,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class CompatRegistry {
     public static boolean SHOW_POTION_EFFECT_TOOLTIPS = true;
 

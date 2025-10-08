@@ -16,7 +16,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = KaleidoscopeCookery.MOD_ID)
+@EventBusSubscriber(modid = KaleidoscopeCookery.MOD_ID)
 public class CommonRegistry {
     @SubscribeEvent
     public static void onSetupEvent(FMLCommonSetupEvent event) {

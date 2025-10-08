@@ -11,7 +11,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ModelEvent;
 
-@EventBusSubscriber(modid = KaleidoscopeCookery.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = KaleidoscopeCookery.MOD_ID, value = Dist.CLIENT)
 public class ModModelEvent {
     private static final String MODELS = "models/";
     private static final String MODELS_CHOPPING_BOARD = MODELS + "chopping_board";

@@ -21,7 +21,7 @@ import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import static net.neoforged.neoforge.client.gui.VanillaGuiLayers.CROSSHAIR;
 
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT, modid = KaleidoscopeCookery.MOD_ID)
+@EventBusSubscriber(modid = KaleidoscopeCookery.MOD_ID, value = Dist.CLIENT)
 public class ClientSetupEvent {
     @SubscribeEvent
     @SuppressWarnings("all")

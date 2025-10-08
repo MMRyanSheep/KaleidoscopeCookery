@@ -7,7 +7,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = KaleidoscopeCookery.MOD_ID)
+@EventBusSubscriber(modid = KaleidoscopeCookery.MOD_ID)
 public class CapabilitiesRegistry {
     @SubscribeEvent
     public static void registerGenericItemHandlers(RegisterCapabilitiesEvent event) {
