@@ -97,6 +97,10 @@ public interface TagMod {
     /**
      * 被本模组当做猪油来源的实体
      */
+    TagKey<Block> SEATS = blockTag("seats");
+    /*
+     * 可以坐下的方块
+     */
     TagKey<EntityType<?>> PIG_OIL_SOURCE = entityTag("pig_oil_source");
     /**
      * 可以拉磨的生物，必须继承自 Mob
