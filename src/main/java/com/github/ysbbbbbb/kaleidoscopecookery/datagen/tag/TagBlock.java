@@ -46,6 +46,13 @@ public class TagBlock extends BlockTagsProvider {
 
                 ModBlocks.KITCHENWARE_RACKS.get(), ModBlocks.CHOPPING_BOARD.get());
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(ModBlocks.STRAW_BLOCK.get());
+        this.tag(TagMod.SEATS)
+                .add(ModBlocks.COOK_STOOL_OAK.get(), ModBlocks.COOK_STOOL_SPRUCE.get(),
+                ModBlocks.COOK_STOOL_ACACIA.get(), ModBlocks.COOK_STOOL_BAMBOO.get(),
+                ModBlocks.COOK_STOOL_BIRCH.get(), ModBlocks.COOK_STOOL_CHERRY.get(),
+                ModBlocks.COOK_STOOL_CRIMSON.get(), ModBlocks.COOK_STOOL_DARK_OAK.get(),
+                ModBlocks.COOK_STOOL_JUNGLE.get(), ModBlocks.COOK_STOOL_MANGROVE.get(),
+                ModBlocks.COOK_STOOL_WARPED.get());
         this.tag(TagMod.TUNDRA_STRIDER_SPEED_BLOCKS).add(
                 Blocks.SNOW, Blocks.SNOW_BLOCK, Blocks.POWDER_SNOW,
                 Blocks.PACKED_ICE, Blocks.ICE, Blocks.FROSTED_ICE, Blocks.BLUE_ICE
